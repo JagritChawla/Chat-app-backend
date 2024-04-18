@@ -7,7 +7,7 @@ import env from "dotenv";
 // import { fileURLToPath } from "url";
 // const __dirname = dirname(fileURLToPath(import.meta.url));
 
-
+const port = process.env.PORT || 3001;
 const app = express();
 app.use(express.json());
 app.use(cors({ origin: true }));
@@ -20,9 +20,9 @@ env.config();
 //   });
 const privateKey = process.env.PRIVATE_KEY;
 
-app.get("/", (req, res) => {
-    res.send("<h1>Backend is working!</h1>");
-  });
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
 app.post("/authenticate", async (req, res) => {
   const user = req.body.username;
@@ -40,4 +40,6 @@ app.post("/authenticate", async (req, res) => {
   }
 });
 
-app.listen(3001);
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
